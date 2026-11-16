@@ -26,7 +26,7 @@ rm -f ${LRGSHOME}/.lrgs.passwd
 
 index=0
 echo "<ddsrecvconf>" > ${LRGSHOME}/ddsrecv.conf
-echo "    <networklist>GOES</networklist>"
+echo "    <networkList>GOES</networkList>" >> ${LRGSHOME}/ddsrecv.conf
 # Setup users
 if [ "$NOAACDA_USERNAME" != "" ]; then
     editPasswd <<EOF

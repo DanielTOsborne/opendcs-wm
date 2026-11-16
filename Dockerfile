@@ -30,7 +30,7 @@ ARG VERSION
 ARG MARKER
 ENV IMAGE_MARKER=${MARKER}
 COPY --chmod=0555 scripts/lrgs-cwbi.sh /
-COPY --chmod=0640 data/netlists /lrgs_home/netlists/
+COPY --chmod=0750  --chown=opendcs:opendcs data/netlists /lrgs_home/netlist/
 CMD ["/lrgs-cwbi.sh"]
 
 FROM ghcr.io/opendcs/migration:${VERSION} AS migration
