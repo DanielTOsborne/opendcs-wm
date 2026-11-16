@@ -4,15 +4,14 @@
 rm -rf ${LRGSHOME}/users
 cp -r $DCSTOOL_HOME/lrgs/users .
 
-rm -rf ${LRGSHOME}/netlist
-cp -r $DCSTOOL_HOME/lrgs/netlist .
+# netlist currently controlled by repo. Will handle automation at a later date.
 
 #  Always generate Generate Config
 cat > $LRGSHOME/lrgs.conf <<EOF
 archiveDir: ${LRGS_ARCHIVE}
 numDayFiles: 7
 ddsRecvConfig: ${LRGSHOME}/ddsrecv.conf
-enableDdsRecv=true
+enableDdsRecv: true
 enableDrgsRecv: false
 drgsRecvConfig: ${LRGSHOME}/drgsconf.xml
 htmlStatusSeconds: 10
@@ -27,6 +26,7 @@ rm -f ${LRGSHOME}/.lrgs.passwd
 
 index=0
 echo "<ddsrecvconf>" > ${LRGSHOME}/ddsrecv.conf
+echo "    <networklist>GOES</networklist>"
 # Setup users
 if [ "$NOAACDA_USERNAME" != "" ]; then
     editPasswd <<EOF
