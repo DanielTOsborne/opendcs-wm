@@ -10,5 +10,6 @@ export DB_MIN_IDLE=5
 export DB_USERNAME=$DATABASE_USERNAME
 export DB_PASSWORD=$DATABASE_PASSWORD
 export DB_VALIDATION_QUERY="select 1 from dual"
+export JAVA_OPTS="$JAVA_OPTS -XX:-UseBASE64Intrinsics "
 
 exec /usr/local/tomcat/bin/catalina.sh run
