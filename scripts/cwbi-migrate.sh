@@ -7,6 +7,7 @@ export DATABASE_IMPLEMENTATION=CWMS-Oracle
 export DATABASE_DRIVER="oracle.jdbc.driver.OracleDriver"
 export DATATYPE_STANDARD="CWMS"
 export KEYGENERATOR="decodes.sql.OracleSequenceKeyGenerator"
+export DECJ_MAXHEAP="$DECJ_MAXHEAP -XX:-UseBASE64Intrinsics "
 
 export MIGRATION_USER=$FLYWAY_USERNAME
 export MIGRATION_PASSWORD=$FLYWAY_PASSWORD

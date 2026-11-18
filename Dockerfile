@@ -3,7 +3,7 @@ ARG MARKER="a"
 
 # Intermediate container here to build district computations
 # this needs to be build per-platform
-FROM golang:1.24.9 AS appstarter_builder
+FROM golang:1.26 AS appstarter_builder
 WORKDIR /usr/src/app
 COPY appstarter/ ./
 RUN go build cmd/appstarter.go
@@ -17,6 +17,9 @@ RUN ./gradlew installDist --info
 FROM ghcr.io/opendcs/compproc:${VERSION} AS apps
 ARG VERSION
 ARG MARKER
+USER root
+RUN apk upgrade --no-cache
+USER opendcs
 # Add add in the custom algos
 COPY --from=algo_builder /home/gradle/project/distribution/build/install/district-algorithms/ /dcs_user_dir/dep/
 #HEALTHCHECK --interval=2m --timeout=30s --start-period=60s --retries=3 CMD [ "/appstarter", "--check" ]
@@ -28,6 +31,9 @@ ENTRYPOINT ["/appstarter"]
 FROM ghcr.io/opendcs/lrgs:${VERSION} AS lrgs
 ARG VERSION
 ARG MARKER
+USER root
+RUN apk upgrade --no-cache
+USER opendcs
 ENV IMAGE_MARKER=${MARKER}
 COPY --chmod=0555 scripts/lrgs-cwbi.sh /
 COPY --chmod=0750  --chown=opendcs:opendcs data/netlists /lrgs_home/netlist/
@@ -38,6 +44,8 @@ ARG VERSION
 ARG MARKER
 USER root
 RUN apk add --no-cache util-linux
+RUN apk upgrade --no-cache
+USER opendcs
 ENV IMAGE_MARKER=${MARKER}
 COPY --chmod=0555 scripts/cwbi-migrate.sh /
 USER opendcs:opendcs
