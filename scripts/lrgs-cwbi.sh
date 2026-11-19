@@ -43,7 +43,7 @@ EOF
 		<name>NOAA CDADATA</name>
 		<port>16003</port>
 		<enabled>true</enabled>
-    <use-tls>TLS</use-tls>
+    <use-tls>NONE</use-tls>
 		<username>${NOAACDA_USERNAME}</username>
 		<authenticate>true</authenticate>
 	</connection>
@@ -104,7 +104,7 @@ do
    CP=$CP:$f
 done
 
-exec java -Xms120m $DECJ_MAXHEAP -cp $CP \
+exec java -Xms120m $DECJ_MAXHEAP -XX:-UseBASE64Intrinsics -cp $CP \
      -DDCSTOOL_HOME=$DH -DDECODES_INSTALL_DIR=$DH \
      -DDCSTOOL_USERDIR=$DCSTOOL_USERDIR -DLRGSHOME=$LRGSHOME \
      lrgs.lrgsmain.LrgsMain -d3 -l /dev/stdout -F -k -
