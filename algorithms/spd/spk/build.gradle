@@ -8,6 +8,7 @@ dependencies {
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'org.apache.struts.xwork:xwork-core:2.2.1.1'
+    implementation 'org.javassist:javassist:3.29.2-GA'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.hamcrest:hamcrest-core:1.3'
